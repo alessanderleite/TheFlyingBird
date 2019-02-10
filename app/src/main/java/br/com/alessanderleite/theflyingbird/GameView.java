@@ -53,6 +53,9 @@ public class GameView extends View {
 
         bgImage = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
 
+        bluePaint.setColor(Color.BLUE);
+        bluePaint.setAntiAlias(false);
+
         scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(32);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
@@ -99,6 +102,13 @@ public class GameView extends View {
             canvas.drawBitmap(bird[0], birdX, birdY, null);
         }
 
+        //Blue
+        blueX -= blueSpeed;
+        if (blueX < 0) {
+            blueX = canvasWidth + 20;
+            blueY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY) + minBirdY);
+        }
+        canvas.drawCircle(blueX, blueY, 10, bluePaint);
 
         canvas.drawText("Score: 0", 20, 60, scorePaint);
         canvas.drawText("Lv.1", canvasWidth/2, 60, levelPaint);
