@@ -24,6 +24,12 @@ public class GameView extends View {
     private int birdY;
     private int birdSpeed;
 
+    //Blue Ball
+    private int blueX;
+    private int blueY;
+    private int blueSpeed = 15;
+    private Paint bluePaint = new Paint();
+
     //Background
     private Bitmap bgImage;
 
