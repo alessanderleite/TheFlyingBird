@@ -35,6 +35,7 @@ public class GameView extends View {
 
     //Score
     private Paint scorePaint = new Paint();
+    private int score;
 
     //Level
     private Paint levelPaint = new Paint();
@@ -72,6 +73,7 @@ public class GameView extends View {
 
         //First position
         birdY = 500;
+        score = 0;
     }
 
     @Override
@@ -104,19 +106,32 @@ public class GameView extends View {
 
         //Blue
         blueX -= blueSpeed;
+        if (hitCheck(blueX, blueY)) {
+            score += 10;
+            blueX = -100;
+        }
         if (blueX < 0) {
             blueX = canvasWidth + 20;
             blueY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY) + minBirdY);
         }
         canvas.drawCircle(blueX, blueY, 10, bluePaint);
 
-        canvas.drawText("Score: 0", 20, 60, scorePaint);
+        canvas.drawText("Score: " + score, 20, 60, scorePaint);
+
         canvas.drawText("Lv.1", canvasWidth/2, 60, levelPaint);
 
         canvas.drawBitmap(life[0], canvas.getWidth() - 200, 30,null);
         canvas.drawBitmap(life[0], canvas.getWidth() - 130, 30,null);
         canvas.drawBitmap(life[1], canvas.getWidth() -  60, 30,null);
 
+    }
+
+    public boolean hitCheck(int x, int y) {
+        if (birdX < x && x < (birdX + bird[0].getWidth()) &&
+                birdY < y && y < (birdY + bird[0].getHeight())) {
+            return true;
+        }
+        return false;
     }
 
     @Override
