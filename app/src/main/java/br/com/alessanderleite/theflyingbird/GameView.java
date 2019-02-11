@@ -121,9 +121,20 @@ public class GameView extends View {
         }
         if (blueX < 0) {
             blueX = canvasWidth + 20;
-            blueY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY) + minBirdY);
+            blueY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY)) + minBirdY;
         }
         canvas.drawCircle(blueX, blueY, 10, bluePaint);
+
+        //Black
+        blackX -= blackSpeed;
+        if (hitCheck(blackX, blackY)) {
+            blackX = -100;
+        }
+        if (blackX < 0) {
+            blackX = canvasWidth + 200;
+            blackY = (int) Math.floor(Math.random() * (maxBirdY - minBirdY)) + minBirdY;
+        }
+        canvas.drawCircle(blackX, blackY, 20, blackPaint);
 
         canvas.drawText("Score: " + score, 20, 60, scorePaint);
 
