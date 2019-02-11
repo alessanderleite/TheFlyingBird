@@ -48,6 +48,7 @@ public class GameView extends View {
 
     //Life
     private Bitmap life[] = new Bitmap[2];
+    private int life_count;
 
     //Status Check
     private boolean touch_flg = false;
@@ -83,6 +84,7 @@ public class GameView extends View {
         //First position
         birdY = 500;
         score = 0;
+        life_count = 3;
     }
 
     @Override
@@ -129,6 +131,11 @@ public class GameView extends View {
         blackX -= blackSpeed;
         if (hitCheck(blackX, blackY)) {
             blackX = -100;
+            life_count--;
+            if (life_count == 0) {
+                //Game Over
+                Log.v("MESSAGE", "GAME OVER");
+            }
         }
         if (blackX < 0) {
             blackX = canvasWidth + 200;
@@ -136,14 +143,23 @@ public class GameView extends View {
         }
         canvas.drawCircle(blackX, blackY, 20, blackPaint);
 
+        //Score
         canvas.drawText("Score: " + score, 20, 60, scorePaint);
 
+        // Level
         canvas.drawText("Lv.1", canvasWidth/2, 60, levelPaint);
 
-        canvas.drawBitmap(life[0], canvas.getWidth() - 200, 30,null);
-        canvas.drawBitmap(life[0], canvas.getWidth() - 130, 30,null);
-        canvas.drawBitmap(life[1], canvas.getWidth() -  60, 30,null);
+        //Life
+        for (int i = 0; i < 3; i++) {
+            int x = (int) (560 + life[0].getWidth() * 1.5 * i);
+            int y = 30;
 
+            if (i < life_count) {
+                canvas.drawBitmap(life[0], x, y, null);
+            } else {
+                canvas.drawBitmap(life[1], x, y, null);
+            }
+        }
     }
 
     public boolean hitCheck(int x, int y) {
