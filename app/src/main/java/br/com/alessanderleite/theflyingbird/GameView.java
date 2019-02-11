@@ -30,6 +30,12 @@ public class GameView extends View {
     private int blueSpeed = 15;
     private Paint bluePaint = new Paint();
 
+    //Black Ball
+    private int blackX;
+    private int blackY;
+    private int blackSpeed = 20;
+    private Paint blackPaint = new Paint();
+
     //Background
     private Bitmap bgImage;
 
@@ -56,6 +62,9 @@ public class GameView extends View {
 
         bluePaint.setColor(Color.BLUE);
         bluePaint.setAntiAlias(false);
+
+        blackPaint.setColor(Color.BLACK);
+        blackPaint.setAntiAlias(false);
 
         scorePaint.setColor(Color.BLACK);
         scorePaint.setTextSize(32);
